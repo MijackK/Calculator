@@ -1,7 +1,8 @@
 let answer;
 let inputArr=[];
 let isNegative=false;
-
+let capturedInput=document.querySelector('#user-input');
+let sign =document.querySelector('#sign');
 
 const mapButton = () =>{
     let calcButtons = document.querySelector('#my-btns');
@@ -18,9 +19,7 @@ const mapButton = () =>{
     for( item of divs){
         item.addEventListener('click', (e) => {
             let input=e.target.id;
-            let capturedInput=document.querySelector('#user-input');
             let number = capturedInput.innerText;
-            let sign =document.querySelector('#sign');
 
             if(/[0123456789.]/.test(input)){
                capturedInput.innerText+=input; 
@@ -28,25 +27,52 @@ const mapButton = () =>{
             else if(input == '+/-'){ 
                  isNegative = !isNegative;
                  sign.innerText = isNegative ? '-':'';  
-                 console.log(sign)  
             }
             else if(/[+-/x=]/.test(input)){
                 shouldCalculate(sign.innerText + number, input);
                 sign.innerText='';
             }
             else{
-               capturedInput.innerText='';
+               capturedInput.innerText=capturedInput.innerText.slice(0,capturedInput.innerText.length-1);
             }
         })
     }
-    document.querySelector('#C').addEventListener('dblclick',(e) => {
+    document.querySelector('#clear').addEventListener('click',(e) => {
         inputArr=[];
         document.querySelector('#answer').innerText=''
+        capturedInput.innerText='';
+    })
+}
 
+let addKeyboardEvents = () => {
+
+    let calcBody = document.querySelector('body'); 
+    calcBody.addEventListener('keydown',(e)=>{
+        let input=e.key;
+        let number = capturedInput.innerText;
+     
+        if(/[0123456789.]/.test(input)){
+           capturedInput.innerText+=input; 
+        }
+        else if(input == '_'){ 
+             isNegative = !isNegative;
+             sign.innerText = isNegative ? '-':'';  
+        }
+        else if(/[+-/*=]/.test(input)){
+            shouldCalculate(sign.innerText + number, input);
+            sign.innerText='';
+        }
+        else if(input =="Backspace"){
+           capturedInput.innerText=capturedInput.innerText.slice(0,capturedInput.innerText.length-1); ;
+        }
+       
     })
 }
 
 const shouldCalculate = (number,operator) =>{
+    
+    operator= operator == '*'? 'x': operator;
+
     if(inputArr.length == 1){
         if(operator == '='){
             return
@@ -55,18 +81,24 @@ const shouldCalculate = (number,operator) =>{
         document.querySelector('#answer').innerText=inputArr.join('');
         return
     }
+   
     if(number==""){
+        if(inputArr.length == 2 && operator != '='){
+            inputArr[1]=operator;
+            document.querySelector('#answer').innerText=inputArr.join('');
+        }
         return
     }
     if(inputArr.length == 0){
+        if(operator == '='){
+            return
+        }
         inputArr.push(number,operator);
         document.querySelector('#answer').innerText=inputArr.join('');
         document.querySelector('#user-input').innerText='';
         return
     }
-    if(number==''){
-        return
-    }
+    
     inputArr.push(number);
     switch(inputArr[1]){
         case '+':
@@ -76,30 +108,29 @@ const shouldCalculate = (number,operator) =>{
            answer = Multiply(Number(inputArr[0]),Number(inputArr[2]));
           break;
           case '/':
+              if(inputArr[2] == '0'){
+                document.querySelector('#answer').innerText ='That\'s illegal';
+                document.querySelector('#user-input').innerText='';
+                inputArr.pop();
+                return;
+              }
            answer = Divide(Number(inputArr[0]),Number(inputArr[2]));
           break;
           case '-':
            answer = Subtract(Number(inputArr[0]),Number(inputArr[2]));
           break;
     }
-    inputArr= operator == "=" ?[answer.toFixed(3)]:[answer.toFixed(3),operator];
+    inputArr= operator == "=" ?[answer.toFixed(1)]:[answer.toFixed(1),operator];
     document.querySelector('#answer').innerText=inputArr.join('');
     document.querySelector('#user-input').innerText='';
-    
-   
-
 }
-const getInput = () =>{
-
-}
-
 const Add = (num1,num2) => num1 + num2;
 const Divide = (num1,num2) => num1 / num2;
 const Subtract = (num1,num2) => num1 - num2;
 const Multiply = (num1,num2) => num1 * num2;
 
-
 mapButton();
+addKeyboardEvents();
 
 
 

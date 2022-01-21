@@ -9,6 +9,7 @@ p{
 .flex-box{
     display: flex;
     justify-content: center;
+    margin-top:2%;
 }
 .calc-body{
     border-style:solid;
@@ -64,4 +65,15 @@ p{
 }
 .btns:hover{
     background-color:rgba(0,0,0,0.4)
+}
+.reset-button{
+    background-color: red;
+    height:30px;
+    width:100px;
+    margin-bottom:5px;
+    margin-left: auto;
+    margin-right:22px;
+    cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
 }
