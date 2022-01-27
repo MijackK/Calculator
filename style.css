@@ -67,7 +67,7 @@ p{
     background-color:rgba(0,0,0,0.4)
 }
 .reset-button{
-    background-color: red;
+    background-color:rgba(230, 59,59,0.8);
     height:30px;
     width:100px;
     margin-bottom:5px;
@@ -76,4 +76,23 @@ p{
     cursor: pointer;
   font-family: 'Courier New', Courier, monospace;
   font-size: 20px;
+  color: white;
+  border-style: none;
 }
+.reset-button:hover{
+    background-color: rgb(230, 59, 59);
+}
+@media only screen and (max-width: 430px) {
+    .calc-body{
+        width:300px;
+    }
+    .btns{
+        width:64.2px;
+        height:64.2px;
+        font-size:33px;
+    }
+    .calc-buttons{
+        width: 270px;
+    }
+    
+  }
