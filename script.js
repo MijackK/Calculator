@@ -20,9 +20,13 @@ const mapButton = () =>{
         item.addEventListener('click', (e) => {
             let input=e.target.id;
             let number = capturedInput.innerText;
+            let floatingPoint = capturedInput.innerText.match(/\./g);
+
 
             if(/[0123456789.]/.test(input)){
-               capturedInput.innerText+=input; 
+                if(input =='.' && floatingPoint)
+                return
+                capturedInput.innerText+=input; 
             }
             else if(input == '+/-'){ 
                  isNegative = !isNegative;
@@ -50,8 +54,11 @@ let addKeyboardEvents = () => {
     calcBody.addEventListener('keydown',(e)=>{
         let input=e.key;
         let number = capturedInput.innerText;
+        let floatingPoint = capturedInput.innerText.match(/\./g);
      
         if(/[0123456789.]/.test(input)){
+            if(input =='.' && floatingPoint)
+            return
            capturedInput.innerText+=input; 
         }
         else if(input == '_'){ 
@@ -82,7 +89,7 @@ const shouldCalculate = (number,operator) =>{
         return
     }
    
-    if(number=="" || number=="."){
+    if(number=="" ){
         if(inputArr.length == 2 && operator != '='){
             inputArr[1]=operator;
             document.querySelector('#answer').innerText=inputArr.join('');
