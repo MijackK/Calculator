@@ -82,7 +82,7 @@ const shouldCalculate = (number,operator) =>{
         return
     }
    
-    if(number==""){
+    if(number=="" || number=="."){
         if(inputArr.length == 2 && operator != '='){
             inputArr[1]=operator;
             document.querySelector('#answer').innerText=inputArr.join('');
