@@ -109,5 +109,11 @@ footer >a:hover{
     .calc-buttons{
         width: 270px;
     }
+    .reset-button{
+        height:30px;
+        width:100px;
+        font-size: 20px;
+
+    }
     
   }
