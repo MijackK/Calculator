@@ -68,14 +68,14 @@ p{
 }
 .reset-button{
     background-color:rgba(230, 59,59,0.8);
-    height:45px;
-    width:150px;
+    height:40px;
+    width:120px;
     margin-bottom:5px;
     margin-left: auto;
     margin-right:22px;
     cursor: pointer;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 30px;
+  font-size: 25px;
   color: white;
   border-style: none;
 }
