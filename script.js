@@ -33,6 +33,8 @@ const mapButton = () =>{
                  sign.innerText = isNegative ? '-':'';  
             }
             else if(/[+-/x=]/.test(input)){
+                if(number == '.' || number =='')
+                return
                 shouldCalculate(sign.innerText + number, input);
                 sign.innerText='';
             }
