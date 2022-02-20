@@ -26,6 +26,10 @@ const mapButton = () =>{
             if(/[0123456789.]/.test(input)){
                 if(input =='.' && floatingPoint)
                 return
+                if(input== '.' && number==''){
+                    capturedInput.innerText = '0'+ input;
+                    return
+                }
                 capturedInput.innerText+=input; 
             }
             else if(input == '+/-'){ 
@@ -61,6 +65,10 @@ let addKeyboardEvents = () => {
         if(/[0123456789.]/.test(input)){
             if(input =='.' && floatingPoint)
             return
+            if(input== '.' && number==''){
+                capturedInput.innerText = '0'+ input;
+                return
+            }
            capturedInput.innerText+=input; 
         }
         else if(input == '_'){ 
@@ -68,6 +76,8 @@ let addKeyboardEvents = () => {
              sign.innerText = isNegative ? '-':'';  
         }
         else if(/[+-/*=]/.test(input)){
+            if(number == '.' || number =='')
+            return
             shouldCalculate(sign.innerText + number, input);
             sign.innerText='';
         }
