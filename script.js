@@ -18,6 +18,7 @@ const mapButton = () =>{
     let divs = document.querySelectorAll('.btns');  
     for( item of divs){
         item.addEventListener('click', (e) => {
+            let answer = document.querySelector('#answer')
             let input=e.target.id;
             let number = capturedInput.innerText;
             let floatingPoint = capturedInput.innerText.match(/\./g);
@@ -37,7 +38,7 @@ const mapButton = () =>{
                  sign.innerText = isNegative ? '-':'';  
             }
             else if(/[+-/x=]/.test(input)){
-                if(number == '.' || number =='')
+                if(number =='' && answer.innerText =="")
                 return
                 shouldCalculate(sign.innerText + number, input);
                 sign.innerText='';
@@ -58,6 +59,7 @@ let addKeyboardEvents = () => {
 
     let calcBody = document.querySelector('body'); 
     calcBody.addEventListener('keydown',(e)=>{
+        let answer = document.querySelector('#answer')
         let input=e.key;
         let number = capturedInput.innerText;
         let floatingPoint = capturedInput.innerText.match(/\./g);
@@ -76,8 +78,10 @@ let addKeyboardEvents = () => {
              sign.innerText = isNegative ? '-':'';  
         }
         else if(/[+-/*=]/.test(input)){
-            if(number == '.' || number =='')
-            return
+            if( number =='' && answer.innerText ==""){
+                return
+            }
+            
             shouldCalculate(sign.innerText + number, input);
             sign.innerText='';
         }
