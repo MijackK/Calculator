@@ -143,7 +143,7 @@ const shouldCalculate = (number,operator) =>{
            answer = Subtract(Number(inputArr[0]),Number(inputArr[2]));
           break;
     }
-    inputArr= operator == "=" ?[answer.toFixed(1)]:[answer.toFixed(1),operator];
+    inputArr= operator == "=" ?[answer.toFixed(3)]:[answer.toFixed(3),operator];
     document.querySelector('#answer').innerText=inputArr.join('');
     document.querySelector('#user-input').innerText='';
 }
